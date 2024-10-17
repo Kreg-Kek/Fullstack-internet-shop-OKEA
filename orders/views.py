@@ -46,7 +46,7 @@ def create_order(request):
                                 price=price,
                                 quantity=quantity,
                             )
-                            product.quantity = quantity
+                            product.quantity -= quantity
                             product.save()
 
                         cart_items.delete()
@@ -55,7 +55,7 @@ def create_order(request):
                         return redirect("user:profile")
             except ValidationError as e:
                 messages.success(request, str(e))
-                return redirect("cart:order")
+                return redirect("orders:create_order")
     else:
         initial = {
             "first_name": request.user.first_name,
