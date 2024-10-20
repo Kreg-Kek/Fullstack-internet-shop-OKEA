@@ -23,7 +23,7 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+        <nav class="navbar navbar-expand-lg" style="background-color: #7a7a7a;" data-bs-theme="dark">
             <div class="container">
                 <a class="navbar-brand" href="{% url "main:index" %}">OKEA</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -38,9 +38,9 @@
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 Информация
                             </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item  text-white" href="#">Доставка и оплата</a></li>
-                                <li><a class="dropdown-item  text-white" href="#">Контактная информация</a></li>
+                            <ul class="dropdown-menu" style="background-color: #7a7a7a;">
+                                {% comment %} <li><a class="dropdown-item  text-white" href="#">Доставка и оплата</a></li>
+                                <li><a class="dropdown-item  text-white" href="#">Контактная информация</a></li> {% endcomment %}
                                 <li><a class="dropdown-item  text-white" href="{% url "main:about" %}">Про нас</a></li>
                             </ul>
                         </li>
@@ -57,8 +57,8 @@
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 Мой профиль
                             </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item  text-white" href="carts/cart.html">Корзина</a></li>
+                            <ul class="dropdown-menu" style="background-color: #7a7a7a;">
+                                <li><a class="dropdown-item  text-white" href="{% url "user:users_cart" %}">Корзина</a></li>
                                 <li><a class="dropdown-item  text-white" href="{% url "users:profile" %}">Личный кабинет</a>
                                 </li>
                                 {% if user.is_admin or user.is_staff %}
@@ -86,13 +86,13 @@
             <div class="row mt-1 position-fixed z-3">
                 <!-- Каталог -->
                 <div class="dropdown mb-2">
-                    <button class="btn btn-secondary dropdown-toggle btn-dark" type="button" data-bs-toggle="dropdown"
+                    <button class="btn btn-secondary dropdown-toggle" style="background-color: #7a7a7a;" type="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         Каталог
                         <img class="mx-1" src="{% static "deps/icons/grid-fill.svg" %}" alt="Catalog Icon" width="16"
                             height="16">
                     </button>
-                    <ul class="dropdown-menu bg-dark" data-bs-theme="dark">
+                    <ul class="dropdown-menu" style="background-color: #7a7a7a;" data-bs-theme="dark">
                         {% cache 60 catalog_categories %}
                         {% tag_categories as categories %}
                         {% for category in categories %}
@@ -110,7 +110,7 @@
         <div class="container">
             <div class="row mt-1">
                 <div class="col-lg-2">
-                    <!-- Пустой блок на Ваше усмотрение -->
+                    <!-- Пустой блок -->
                 </div>
                 <div class="col-lg-10">
                     <!-- Контент на странице -->
