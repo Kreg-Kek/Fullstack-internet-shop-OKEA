@@ -12,7 +12,6 @@ class CatalogView(ListView):
     template_name = "goods/catalog.html"
     context_object_name = "goods"
     paginate_by = 3
-    allow_empty = False
 
     def get_queryset(self):
         category_slug = self.kwargs.get("category_slug")
@@ -38,6 +37,22 @@ class CatalogView(ListView):
         context = super().get_context_data(**kwargs)
         context["title"] = "OKEA - Каталог"
         context["slug_url"] = self.kwargs.get("category_slug")
+        return context
+
+
+class ProductView(DetailView):
+
+    template_name = "goods/product.html"
+    slug_url_kwarg = "product_slug"
+    context_object_name = "product"
+
+    def get_object(self, queryset=None):
+        product = Products.objects.get(slug=self.kwargs.get(self.slug_url_kwarg))
+        return product
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = self.object.name
         return context
 
 
@@ -71,23 +86,6 @@ class CatalogView(ListView):
 #         "slug_url": category_slug,
 #     }
 #     return render(request, "goods/catalog.html", context)
-
-
-class ProductView(DetailView):
-
-    template_name = "goods/product.html"
-    slug_url_kwarg = "product_slug"
-    context_object_name = "product"
-
-    def get_object(self, queryset=None):
-        product = Products.objects.get(slug=self.kwargs.get(self.slug_url_kwarg))
-        return product
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["title"] = self.object.name
-        return context
-
 
 # def product(request, product_slug):
 #     product = Products.objects.get(slug=product_slug)

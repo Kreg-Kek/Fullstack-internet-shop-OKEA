@@ -36,3 +36,11 @@ body {
   border-radius: 15px;
   font-size: 0.7rem;
 }
+
+a.nav-link:hover {
+  background-color: #272727b9;
+}
+
+button.button-secondary:hover {
+  background-color: #272727b9;
+}
